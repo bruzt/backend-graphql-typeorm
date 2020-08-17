@@ -31,6 +31,7 @@ export default gql`
         phone: String
         createdAt: String
         updatedAt: String
+        user: User
     }
 
     type Project {

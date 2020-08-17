@@ -44,5 +44,17 @@ export default gql`
         destroyAddress(id: ID!): Boolean
 
         #################################
+
+        storePhone(
+            userId: ID!
+            phone: String!
+        ): Phone
+
+        updatePhone(
+            id: ID!
+            newPhone: String!
+        ): Phone
+
+        destroyPhone(id: ID!): Boolean
     }
 `;
