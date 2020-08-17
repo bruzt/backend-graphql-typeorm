@@ -29,7 +29,7 @@ export default class UserEntity extends BaseEntity {
     @Column()
     email!: string;
 
-    @Column({ select: false })
+    @Column()
     password!: string;
     
     @CreateDateColumn()
@@ -46,7 +46,8 @@ export default class UserEntity extends BaseEntity {
     ////////////////////////////////////
     
     @AfterLoad()
-    private loadPassword(){
+    private async loadPassword(){
+
         this.tempPassword = this.password;
     }
     

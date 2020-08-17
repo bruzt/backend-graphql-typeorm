@@ -8,14 +8,6 @@ export default gql`
         email: String
         createdAt: String
         updatedAt: String
-    }
-
-    type UserInfo {
-        id: ID
-        name: String
-        email: String
-        createdAt: String
-        updatedAt: String
         address: Address
         phones: [Phone]
         usersProjects: [UsersProjects]
@@ -31,6 +23,7 @@ export default gql`
         zipcode: String
         createdAt: String
         updatedAt: String
+        user: User
     }
 
     type Phone {
@@ -50,35 +43,5 @@ export default gql`
 
     type UsersProjects {
         project: Project
-    }
-
-    ######################################
-
-    type Query {
-
-        listUsers: [User]
-
-        showUser(id: ID!): UserInfo
-
-    }
-
-    ####################################
-
-    type Mutation {
-
-        createUser(
-            name: String!
-            email: String!
-            password: String!
-        ): User
-
-        updateUser(
-            id: Int!
-            name: String
-            email: String
-            password: String
-        ): User
-
-        destroyUser(id: ID!): User
     }
 `;

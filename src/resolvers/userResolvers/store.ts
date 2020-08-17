@@ -2,7 +2,7 @@ import { UserInputError } from 'apollo-server-express';
 
 import UserEntity from '../../entities/UserEntity';
 
-export interface ICreateUser {
+export interface IStoreUser {
     name: string;
     email: string;
     password: string;
@@ -12,7 +12,7 @@ export default async function store({
     name,
     email,
     password
-}: ICreateUser){
+}: IStoreUser){
  
     const user = await UserEntity.findOne({ email });
 

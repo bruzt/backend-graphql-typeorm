@@ -1,10 +1,12 @@
 import { UserInputError } from 'apollo-server-express';
 
 import UserEntity from '../../entities/UserEntity';
-import { ICreateUser } from './store';
 
-export interface IUpdateUser extends ICreateUser {
+export interface IUpdateUser {
     id: number;
+    name?: string;
+    email?: string;
+    password?: string;
 }
 
 export default async function update({

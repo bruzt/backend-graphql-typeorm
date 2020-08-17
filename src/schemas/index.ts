@@ -1,5 +1,9 @@
-import userSchema from './userSchema';
+import types from './types';
+import queries from './queries';
+import mutations from './mutations';
 
 export default [
-    userSchema,
+    types,
+    queries,
+    mutations
 ]

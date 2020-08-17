@@ -8,9 +8,7 @@ export default async function destroy(id: number){
 
     if(!user) throw new UserInputError('User not found');
 
-    const d = await UserEntity.softRemove(user);
+    await user.softRemove();
 
-    console.log(d);
-
-    return d;
+    return true;
 }
