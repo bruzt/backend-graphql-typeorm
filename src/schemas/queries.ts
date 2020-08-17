@@ -11,6 +11,10 @@ export default gql`
         showAddress(id: ID!): Address
 
         listPhones: [Phone]
-        showPhones(id: ID!): Phone
+        showPhone(id: ID!): Phone
+
+        listProjects: [Project]
+        showProject(id: ID!): Project
+
     }
 `;

@@ -56,5 +56,21 @@ export default gql`
         ): Phone
 
         destroyPhone(id: ID!): Boolean
+
+        ################################
+
+        storeProject(
+            title: String!
+            description: String!
+        ): Project
+
+        updateProject(
+            id: ID!
+            title: String
+            description: String
+        ): Project
+
+        destroyProject(id: ID!): Boolean
+
     }
 `;
