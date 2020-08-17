@@ -6,16 +6,20 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
+    Column,
 } from 'typeorm';
 
 import UserEntity from './UserEntity';
 import ProjectEntity from './ProjectEntity';
 
 @Entity('users_projects')
-export default class UsersProjectsModel extends BaseEntity {
+export default class UsersProjectsEntity extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id!: number;
+
+    @Column()
+    status!: string;
 
     @CreateDateColumn()
     createdAt!: Date;

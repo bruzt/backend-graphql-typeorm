@@ -14,6 +14,11 @@ export class createTableUsersProjects1597441796796 implements MigrationInterface
                     isGenerated: true
                 },
                 {
+                    name: 'status',
+                    type: 'varchar',
+                    default: "'working'"
+                },
+                {
                     name: 'userId',
                     type: 'int',
                 },

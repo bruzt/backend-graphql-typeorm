@@ -43,6 +43,19 @@ export default gql`
     }
 
     type UsersProjects {
+        id: ID
+        status: String
+        createdAt: String
+        updatedAt: String
+        deletedAt: String
+        user: User
         project: Project
     }
+
+    type UsersProjectsStore {
+        id: ID
+        status: String
+        createdAt: String
+    }
+
 `;

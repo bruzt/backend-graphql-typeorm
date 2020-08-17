@@ -2,6 +2,7 @@ import userResolvers from './resolvers/userResolvers';
 import addressResolvers from './resolvers/addressResolvers';
 import phoneResolvers from './resolvers/phoneResolvers';
 import projectResolvers from './resolvers/projectResolvers';
+import usersProjectsResolvers from './resolvers/usersProjectsResolvers';
 
 import { IStoreUser } from './resolvers/userResolvers/store';
 import { IUpdateUser } from './resolvers/userResolvers/update';
@@ -11,6 +12,8 @@ import { IStorePhone } from './resolvers/phoneResolvers/store';
 import { IUpdatePhone } from './resolvers/phoneResolvers/update';
 import { IStoreProject } from './resolvers/projectResolvers/store';
 import { IUpdateProject } from './resolvers/projectResolvers/update';
+import { IStoreUsersProjects } from './resolvers/usersProjectsResolvers/store';
+import { IUpdateUserProject } from './resolvers/usersProjectsResolvers/update';
 
 export default {
 
@@ -27,6 +30,9 @@ export default {
 
         listProjects: () => projectResolvers.list(),
         showProject: (_, body: { id: number; }) => projectResolvers.show(body.id),
+
+        listUsersProjects: () => usersProjectsResolvers.list(),
+        showUsersProjects: (_, body: { id: number; }) => usersProjectsResolvers.show(body.id),
 
     },
 
@@ -47,6 +53,10 @@ export default {
         storeProject: (_, body: IStoreProject) => projectResolvers.store(body),
         updateProject: (_, body: IUpdateProject) => projectResolvers.update(body),
         destroyProject: (_, body: { id: number; }) => projectResolvers.destroy(body.id),
+
+        storeUserProject: (_, body: IStoreUsersProjects) => usersProjectsResolvers.store(body),
+        updateUserProject: (_, body: IUpdateUserProject) => usersProjectsResolvers.update(body),
+        destroyUserProject: (_, body: { id: number; }) => usersProjectsResolvers.destroy(body.id),
 
     }
 }

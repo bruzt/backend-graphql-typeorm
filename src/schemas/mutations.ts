@@ -72,5 +72,19 @@ export default gql`
 
         destroyProject(id: ID!): Boolean
 
+        ################################
+
+        storeUserProject(
+            status: String
+            userId: ID!
+            projectId: ID!
+        ): UsersProjectsStore
+
+        updateUserProject(
+            id: ID!
+            status: String
+        ): UsersProjectsStore
+
+        destroyUserProject(id: ID!): Boolean
     }
 `;
