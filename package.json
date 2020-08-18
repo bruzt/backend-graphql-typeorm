@@ -5,11 +5,20 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "npm run prod",
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "prod": "pm2 start --name backend-graphql-typeorm ts-node -- --transpile-only src/server.ts",
+
+    "test": "cross-env NODE_ENV=test jest",
+    
+    "dev": "cross-env NODE_ENV=development ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    
+    "preprod": "npm run prod:migration:run",
+    "prod": "cross-env NODE_ENV=production pm2 start --name backend-graphql-typeorm ts-node -- --transpile-only src/server.ts",
     "postprod": "pm2 monit",
-    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
-    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert"
+    
+    "test:migration:run": "cross-env NODE_ENV=test ts-node ./node_modules/typeorm/cli.js migration:run",
+    "test:migration:revert": "cross-env NODE_ENV=test ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "dev:migration:run": "cross-env NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:run",
+    "dev:migration:revert": "cross-env NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "prod:migration:run": "cross-env NODE_ENV=production ts-node ./node_modules/typeorm/cli.js migration:run"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +26,8 @@
   "dependencies": {
     "apollo-server-express": "^2.16.1",
     "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "pg": "^8.3.0",
