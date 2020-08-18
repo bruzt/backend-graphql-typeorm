@@ -20,43 +20,43 @@ export default {
     Query: {
 
         listUsers: () => userResolvers.list(),
-        showUser: (_, body: { id: number; }) => userResolvers.show(body.id),
+        showUser: (_: unknown, args: { id: number; }) => userResolvers.show(args.id),
 
         listAddresses: () => addressResolvers.list(),
-        showAddress: (_, body: { id: number; }) => addressResolvers.show(body.id),
+        showAddress: (_: unknown, args: { id: number; }) => addressResolvers.show(args.id),
 
         listPhones: () => phoneResolvers.list(),
-        showPhone: (_, body: { id: number; }) => phoneResolvers.show(body.id),
+        showPhone: (_: unknown, args: { id: number; }) => phoneResolvers.show(args.id),
 
         listProjects: () => projectResolvers.list(),
-        showProject: (_, body: { id: number; }) => projectResolvers.show(body.id),
+        showProject: (_: unknown, args: { id: number; }) => projectResolvers.show(args.id),
 
         listUsersProjects: () => usersProjectsResolvers.list(),
-        showUsersProjects: (_, body: { id: number; }) => usersProjectsResolvers.show(body.id),
+        showUsersProjects: (_: unknown, args: { id: number; }) => usersProjectsResolvers.show(args.id),
 
     },
 
     Mutation: {
 
-        storeUser: (_, body: IStoreUser) => userResolvers.store(body),
-        updateUser: (_, body: IUpdateUser) => userResolvers.update(body),
-        destroyUser: (_, body: { id: number }) => userResolvers.destroy(body.id),
+        storeUser: (_: unknown, args: IStoreUser) => userResolvers.store(args),
+        updateUser: (_: unknown, args: IUpdateUser) => userResolvers.update(args),
+        destroyUser: (_: unknown, args: { id: number }) => userResolvers.destroy(args.id),
 
-        storeAddress: (_, body: IStoreAddress) => addressResolvers.store(body),
-        updateAddress: (_, body: IUpdateAddress) => addressResolvers.update(body),
-        destroyAddress: (_, body: { id: number; }) => addressResolvers.destroy(body.id),
+        storeAddress: (_: unknown, args: IStoreAddress) => addressResolvers.store(args),
+        updateAddress: (_: unknown, args: IUpdateAddress) => addressResolvers.update(args),
+        destroyAddress: (_: unknown, args: { id: number; }) => addressResolvers.destroy(args.id),
         
-        storePhone: (_, body: IStorePhone) => phoneResolvers.store(body),
-        updatePhone: (_, body: IUpdatePhone) => phoneResolvers.update(body),
-        destroyPhone: (_, body: { id: number; }) => phoneResolvers.destroy(body.id),
+        storePhone: (_: unknown, args: IStorePhone) => phoneResolvers.store(args),
+        updatePhone: (_: unknown, args: IUpdatePhone) => phoneResolvers.update(args),
+        destroyPhone: (_: unknown, args: { id: number; }) => phoneResolvers.destroy(args.id),
 
-        storeProject: (_, body: IStoreProject) => projectResolvers.store(body),
-        updateProject: (_, body: IUpdateProject) => projectResolvers.update(body),
-        destroyProject: (_, body: { id: number; }) => projectResolvers.destroy(body.id),
+        storeProject: (_: unknown, args: IStoreProject) => projectResolvers.store(args),
+        updateProject: (_: unknown, args: IUpdateProject) => projectResolvers.update(args),
+        destroyProject: (_: unknown, args: { id: number; }) => projectResolvers.destroy(args.id),
 
-        storeUserProject: (_, body: IStoreUsersProjects) => usersProjectsResolvers.store(body),
-        updateUserProject: (_, body: IUpdateUserProject) => usersProjectsResolvers.update(body),
-        destroyUserProject: (_, body: { id: number; }) => usersProjectsResolvers.destroy(body.id),
+        storeUserProject: (_: unknown, args: IStoreUsersProjects) => usersProjectsResolvers.store(args),
+        updateUserProject: (_: unknown, args: IUpdateUserProject) => usersProjectsResolvers.update(args),
+        destroyUserProject: (_: unknown, args: { id: number; }) => usersProjectsResolvers.destroy(args.id),
 
     }
 }

@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 
 let env: string;
-if(process.env.NODE_ENV === 'test') env = '.env.test';
-else if(process.env.NODE_ENV === 'production') env = '.env';
+if(process.env.NODE_ENV === 'production') env = '.env';
+else if(process.env.NODE_ENV === 'test') env = '.env.test';
 else env = '.env.dev';
 
 dotenv.config({
@@ -14,10 +14,10 @@ dotenv.config({
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 
+import './database/connection';
+
 import schemas from './schemas';
 import resolverMap from './resolverMap';
-
-import './database/connection';
 
 const app = express();
 
