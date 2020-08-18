@@ -1,14 +1,12 @@
 import supertest from 'supertest';
-//import { promisify } from 'util';
-//import { exec } from 'child_process';
-//const execAsync = promisify(exec);
 
 import connection from '../../../database/connection';
 
 import app from '../../../app';
 import UserEntity from '../../../entities/UserEntity';
+import AddressEntity from '../../../entities/AddressEntity';
 
-describe('', () => {
+describe('Address Resolver List test suit', () => {
 
     beforeAll( async () => {
 
@@ -20,7 +18,7 @@ describe('', () => {
         await (await connection).close();
     });
 
-    it('should return an array of users', async () => {
+    it('should return an array of addresses', async () => {
 
         const user1 = UserEntity.create({
             name: 'teste 1',
@@ -37,24 +35,47 @@ describe('', () => {
         });
         await user2.save();
 
+        const addr1 = AddressEntity.create({
+            street: 'aaa',
+            number: 'bbb',
+            neighborhood: 'ccc',
+            city: 'ddd',
+            uf: 'eee',
+            zipcode: '111',
+            user: user1
+        });
+        await addr1.save();
+
+        const addr2 = AddressEntity.create({
+            street: 'fff',
+            number: 'ggg',
+            neighborhood: 'hhh',
+            city: 'iii',
+            uf: 'jjj',
+            zipcode: '222',
+            user: user2
+        });
+        await addr2.save();
+
         const response = await supertest(app).post('/graphql')
             .send({
                 query: `
                     query {
-                        listUsers {
+                        listAddresses {
                             id
-                            name
-                            email
+                            street
                         }
                     }
                 `
             })
         ;
 
+        expect(response.body.data.listAddresses.length).toBe(2);
+        expect(response.body.data.listAddresses[0].street).toBe('aaa');
+        
         await user1.remove();
         await user2.remove();
-
-        expect(response.body.data.listUsers.length).toBe(2);
-        expect(response.body.data.listUsers[0].name).toBe('teste 1');
+        await addr1.remove();
+        await addr2.remove();
     });
-})
+});
