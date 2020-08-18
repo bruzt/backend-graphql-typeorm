@@ -29,7 +29,7 @@ const apollo = new ApolloServer({
 
 apollo.applyMiddleware({ 
     app,
-    cors: { origin: process.env.CORS_ORIGIN_URL } 
+    cors: { origin: process.env.CORS_ORIGIN } 
 });
 
 export default app;
