@@ -22,7 +22,7 @@ export default {
         listUsers: () => userResolvers.list(),
         showUser: (_, body: { id: number; }) => userResolvers.show(body.id),
 
-        listAddress: () => addressResolvers.list(),
+        listAddresses: () => addressResolvers.list(),
         showAddress: (_, body: { id: number; }) => addressResolvers.show(body.id),
 
         listPhones: () => phoneResolvers.list(),

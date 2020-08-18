@@ -7,7 +7,7 @@ export default gql`
         listUsers: [User]
         showUser(id: ID!): User
 
-        listAddress: [Address]
+        listAddresses: [Address]
         showAddress(id: ID!): Address
 
         listPhones: [Phone]

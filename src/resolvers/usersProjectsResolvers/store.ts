@@ -1,4 +1,8 @@
+import { UserInputError } from 'apollo-server-express';
+
 import UsersProjectsEntity from '../../entities/UsersProjectsEntity';
+import UserEntity from '../../entities/UserEntity';
+import ProjectEntity from '../../entities/ProjectEntity';
 
 export interface IStoreUsersProjects {
     status?: string;
@@ -12,10 +16,19 @@ export default async function store({
     projectId
 }: IStoreUsersProjects){
 
+    const user = await UserEntity.findOne({ id: userId });
+    if(!user) throw new UserInputError('User not found');
+
+    const project = await ProjectEntity.findOne({ id: projectId });
+    if(!project) throw new UserInputError('Project not found');
+
+    const userProject = await UsersProjectsEntity.findOne({ user, project });
+    if(userProject) throw new UserInputError('User already assign to this project');
+
     const newUserProject = UsersProjectsEntity.create({
         status,
-        user: userId as any,
-        project: projectId as any
+        user,
+        project
     });
 
     return newUserProject.save();
