@@ -1,11 +1,10 @@
 import supertest from 'supertest';
 
 import connection from '../../../database/connection';
-
 import app from '../../../app';
 import UserEntity from '../../../entities/UserEntity';
 import AddressEntity from '../../../entities/AddressEntity';
-import clearDBTables from '../../../testUtils/clearDBTables';
+import truncateDBTables from '../../../testUtils/truncateDBTables';
 
 describe('Address Resolver Show test suit', () => {
 
@@ -16,7 +15,7 @@ describe('Address Resolver Show test suit', () => {
 
     beforeEach( () => {
 
-        return clearDBTables();
+        return truncateDBTables();
     });
 
     afterAll( async () => {

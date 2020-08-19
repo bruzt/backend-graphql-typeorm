@@ -1,10 +1,9 @@
 import supertest from 'supertest';
 
 import connection from '../../../database/connection';
-
 import app from '../../../app';
 import UserEntity from '../../../entities/UserEntity';
-import clearDBTables from '../../../testUtils/clearDBTables';
+import truncateDBTables from '../../../testUtils/truncateDBTables';
 
 describe('User Resolver Show test suit', () => {
 
@@ -15,7 +14,7 @@ describe('User Resolver Show test suit', () => {
 
     beforeEach( () => {
 
-        return clearDBTables();
+        return truncateDBTables();
     });
 
     afterAll( async () => {
