@@ -5,17 +5,23 @@ import connection from '../../../database/connection';
 import app from '../../../app';
 import UserEntity from '../../../entities/UserEntity';
 import AddressEntity from '../../../entities/AddressEntity';
+import clearDBTables from '../../../testUtils/clearDBTables';
 
 describe('Address Resolver Show test suit', () => {
 
-    beforeAll( async () => {
+    beforeAll( () => {
 
-        await connection;
+        return connection;
+    });
+
+    beforeEach( () => {
+
+        return clearDBTables();
     });
 
     afterAll( async () => {
 
-        await (await connection).close();
+        return (await connection).close();
     });
 
     it('should return an specific address', async () => {
@@ -50,12 +56,8 @@ describe('Address Resolver Show test suit', () => {
                 `
             })
         ;
-
-        const addrId = addr.id;
-        await user.remove();
-        await addr.remove();
-
-        expect(response.body.data.showAddress.id).toBe(`${addrId}`);
+        
+        expect(response.body.data.showAddress.id).toBe(`${addr.id}`);
         expect(response.body.data.showAddress.street).toBe('aaa');
 
     });

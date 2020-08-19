@@ -4,17 +4,23 @@ import connection from '../../../database/connection';
 
 import app from '../../../app';
 import UserEntity from '../../../entities/UserEntity';
+import clearDBTables from '../../../testUtils/clearDBTables';
 
 describe('User Resolver List test suit', () => {
 
-    beforeAll( async () => {
+    beforeAll( () => {
 
-        await connection;
+        return connection;
+    });
+
+    beforeEach( () => {
+
+        return clearDBTables();
     });
 
     afterAll( async () => {
 
-        await (await connection).close();
+        return (await connection).close();
     });
 
     it('should return an array of users', async () => {
@@ -48,10 +54,6 @@ describe('User Resolver List test suit', () => {
             })
         ;
 
-        await user1.remove();
-        await user2.remove();
-
         expect(response.body.data.listUsers.length).toBe(2);
-        expect(response.body.data.listUsers[0].name).toBe('teste 1');
     });
 });

@@ -3,10 +3,9 @@ import supertest from 'supertest';
 import connection from '../../../database/connection';
 
 import app from '../../../app';
-import UserEntity from '../../../entities/UserEntity';
 import clearDBTables from '../../../testUtils/clearDBTables';
 
-describe('User Resolver Show test suit', () => {
+describe('User Resolver Store test suit', () => {
 
     beforeAll( () => {
 
@@ -23,28 +22,25 @@ describe('User Resolver Show test suit', () => {
         return (await connection).close();
     });
 
-    it('should return an specific user', async () => {
-
-        const user = UserEntity.create({
-            name: 'teste 1',
-            email: 'teste@teste.com',
-            password: '123'
-        });
-
-        await user.save();
+    it('should store an user', async () => {
 
         const response = await supertest(app).post('/graphql')
             .send({
                 query: `
-                    query {
-                        showUser(id: ${user.id}) {
+                    mutation {
+                        storeUser(
+                            name: "novo user"
+                            email: "u@t.com"
+                            password: "1b5C8"
+                        ) {
                             id
+                            name
                         }
                     }
                 `
             })
         ;
 
-        expect(Number(response.body.data.showUser.id)).toBe(user.id);
+        expect(response.body.data.storeUser.name).toBe('novo user');
     });
 });

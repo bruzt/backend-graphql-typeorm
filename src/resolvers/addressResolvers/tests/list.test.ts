@@ -5,17 +5,23 @@ import connection from '../../../database/connection';
 import app from '../../../app';
 import UserEntity from '../../../entities/UserEntity';
 import AddressEntity from '../../../entities/AddressEntity';
+import clearDBTables from '../../../testUtils/clearDBTables';
 
 describe('Address Resolver List test suit', () => {
 
-    beforeAll( async () => {
+    beforeAll( () => {
 
-        await connection;
+        return connection;
+    });
+
+    beforeEach( () => {
+
+        return clearDBTables();
     });
 
     afterAll( async () => {
 
-        await (await connection).close();
+        return (await connection).close();
     });
 
     it('should return an array of addresses', async () => {
@@ -71,11 +77,5 @@ describe('Address Resolver List test suit', () => {
         ;
 
         expect(response.body.data.listAddresses.length).toBe(2);
-        expect(response.body.data.listAddresses[0].street).toBe('aaa');
-        
-        await user1.remove();
-        await user2.remove();
-        await addr1.remove();
-        await addr2.remove();
     });
 });
