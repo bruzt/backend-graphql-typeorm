@@ -42,10 +42,10 @@ describe('User Resolver Destroy test suit', () => {
             })
         ;
 
-        const updatedUser = await UserEntity.findOne({ id: user.id });
+        const deletedUser = await UserEntity.findOne({ id: user.id });
         
         expect(response.body.data.destroyUser).toBe(true);
-        expect(updatedUser?.deletedAt).not.toBeNull();
+        expect(deletedUser?.deletedAt).not.toBeNull();
     });
 
     it('should return an error for "User not found"', async () => {
