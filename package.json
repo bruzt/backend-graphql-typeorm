@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run prod",
 
+    "pretest": "npm run test:migration:run",
     "test": "cross-env NODE_ENV=test jest",
 
     "dev": "cross-env NODE_ENV=development ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
