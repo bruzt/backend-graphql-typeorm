@@ -30,7 +30,7 @@ export default async function store({
 
         const oldAddress = await AddressEntity.findOne({ id: user.address.id });
 
-        await oldAddress?.remove();
+        if(oldAddress) await oldAddress.remove();
     }
 
     const newAddress = AddressEntity.create({
