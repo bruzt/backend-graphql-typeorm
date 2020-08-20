@@ -1,6 +1,5 @@
 
 ## Posgres Tests
-
 ```
 sudo docker run -d \
     --name postgres-typeorm-tests \
@@ -20,7 +19,6 @@ sudo docker exec -ti postgres-typeorm-tests psql -d tests -U devDB -W
 ```
 
 ## Posgres Dev
-
 ```
 sudo docker run -d \
     --name postgres-typeorm-dev \
