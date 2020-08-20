@@ -6,7 +6,7 @@ export default async function show(id: number){
 
     const project = await ProjectEntity.findOne({ id });
 
-    if(!project) throw new UserInputError('User not found');
+    if(!project) throw new UserInputError('Project not found');
 
     return project;
 }
