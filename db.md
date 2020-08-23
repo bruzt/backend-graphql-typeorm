@@ -1,7 +1,7 @@
 
 ## Posgres Tests
 ```
-sudo docker run -d \
+sudo docker run --rm -d \
     --name postgres-typeorm-tests \
     -e POSTGRES_USER=testDB \
     -e POSTGRES_PASSWORD=123 \
@@ -20,7 +20,7 @@ sudo docker exec -ti postgres-typeorm-tests psql -d tests -U devDB -W
 
 ## Posgres Dev
 ```
-sudo docker run -d \
+sudo docker run --rm -d \
     --name postgres-typeorm-dev \
     -e POSTGRES_USER=devDB \
     -e POSTGRES_PASSWORD=123 \
