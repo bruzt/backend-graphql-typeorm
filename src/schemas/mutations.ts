@@ -4,6 +4,13 @@ export default gql`
 
     type Mutation {
 
+        session(
+            email: String!
+            password: String!
+        ): Token
+
+        #################################
+
         storeUser(
             name: String!
             email: String!

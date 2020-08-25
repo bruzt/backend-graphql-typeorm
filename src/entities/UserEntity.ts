@@ -12,6 +12,7 @@ import {
     DeleteDateColumn,
 } from 'typeorm';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 import AddressEntity from './AddressEntity';
 import PhoneEntity from './PhoneEntity';
@@ -62,6 +63,10 @@ export default class UserEntity extends BaseEntity {
     checkPassword(password: string){
         return bcrypt.compare(password, this.password);
     }    
+
+    generateJwt(){
+        return { token: jwt.sign({ id: this.id }, process.env.APP_SECRET as string, { expiresIn: '12h' }) };
+    }
 
     ///////////////////////////////////////
 

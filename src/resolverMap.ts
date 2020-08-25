@@ -1,9 +1,13 @@
+import { ValidationContext } from 'graphql';
+
+import session from './resolvers/sessionResolver/store';
 import userResolvers from './resolvers/userResolvers';
 import addressResolvers from './resolvers/addressResolvers';
 import phoneResolvers from './resolvers/phoneResolvers';
 import projectResolvers from './resolvers/projectResolvers';
 import usersProjectsResolvers from './resolvers/usersProjectsResolvers';
 
+import { ISession } from './resolvers/sessionResolver/store';
 import { IStoreUser } from './resolvers/userResolvers/store';
 import { IUpdateUser } from './resolvers/userResolvers/update';
 import { IStoreAddress } from './resolvers/addressResolvers/store';
@@ -37,6 +41,8 @@ export default {
     },
 
     Mutation: {
+
+        session: (_: unknown, args: ISession) => session(args),
 
         storeUser: (_: unknown, args: IStoreUser) => userResolvers.store(args),
         updateUser: (_: unknown, args: IUpdateUser) => userResolvers.update(args),
