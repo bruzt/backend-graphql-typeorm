@@ -38,7 +38,6 @@ describe('User Resolver Update test suit', () => {
                 query: `
                     mutation {
                         updateUser(
-                            id: ${user.id}
                             name: "Novo nome"
                             email: "novo@email.com"
                             password: "456"
@@ -75,7 +74,6 @@ describe('User Resolver Update test suit', () => {
                 query: `
                     mutation {
                         updateUser(
-                            id: 1
                             name: "Novo nome"
                             email: "novo@email.com"
                             password: "456"
