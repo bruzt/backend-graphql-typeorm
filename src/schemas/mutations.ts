@@ -18,7 +18,6 @@ export default gql`
         ): User
 
         updateUser(
-            id: Int!
             name: String
             email: String
             password: String

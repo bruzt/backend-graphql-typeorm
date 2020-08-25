@@ -1,4 +1,4 @@
-import { ValidationContext } from 'graphql';
+import { Request } from 'express';
 
 import session from './resolvers/sessionResolver/store';
 import userResolvers from './resolvers/userResolvers';
@@ -45,7 +45,7 @@ export default {
         session: (_: unknown, args: ISession) => session(args),
 
         storeUser: (_: unknown, args: IStoreUser) => userResolvers.store(args),
-        updateUser: (_: unknown, args: IUpdateUser) => userResolvers.update(args),
+        updateUser: (_: unknown, args: IUpdateUser, context: { req: Request; }) => userResolvers.update(args, context),
         destroyUser: (_: unknown, args: { id: number }) => userResolvers.destroy(args.id),
 
         storeAddress: (_: unknown, args: IStoreAddress) => addressResolvers.store(args),

@@ -65,7 +65,7 @@ export default class UserEntity extends BaseEntity {
     }    
 
     generateJwt(){
-        return { token: jwt.sign({ id: this.id }, process.env.APP_SECRET as string, { expiresIn: '12h' }) };
+        return { token: jwt.sign({ userId: this.id }, process.env.APP_SECRET as string, { expiresIn: '12h' }) };
     }
 
     ///////////////////////////////////////

@@ -24,12 +24,15 @@ const app = express();
 const apollo = new ApolloServer({
     typeDefs: schemas,
     resolvers: resolverMap,
-    debug: false // remove stacktrace from error response
+    context: ({ req }) => ({ req }),
+    debug: false, // remove stacktrace from error response
 });
 
 apollo.applyMiddleware({ 
     app,
-    cors: { origin: process.env.CORS_ORIGIN } 
+    cors: { 
+        origin: process.env.CORS_ORIGIN,
+    },
 });
 
 export default app;

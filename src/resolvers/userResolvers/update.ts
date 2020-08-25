@@ -1,22 +1,25 @@
 import { UserInputError } from 'apollo-server-express';
+import { Request } from 'express';
 
 import UserEntity from '../../entities/UserEntity';
+import checkHeadersAuthorization from '../../utils/checkHeadersAuthorization';
 
 export interface IUpdateUser {
-    id: number;
     name?: string;
     email?: string;
     password?: string;
 }
 
-export default async function update({
-    id,
-    name,
-    email,
-    password
-}: IUpdateUser){
+export default async function update(
+    args: IUpdateUser,
+    context: { req: Request; }
+){
 
-    const user = await UserEntity.findOne({ id });
+    const tokenPayload = checkHeadersAuthorization(context.req);
+
+    const { name, email, password } = args;
+    
+    const user = await UserEntity.findOne({ id: tokenPayload.userId });
 
     if(!user) throw new UserInputError('User not found');
 

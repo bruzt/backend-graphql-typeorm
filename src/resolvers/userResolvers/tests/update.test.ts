@@ -29,10 +29,11 @@ describe('User Resolver Update test suit', () => {
             email: 'teste@teste.com',
             password: '123'
         });
-
         await user.save();
+        const jwt = user.generateJwt();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
@@ -59,7 +60,17 @@ describe('User Resolver Update test suit', () => {
 
     it('should return error for "User not found"', async () => {
 
+        const user = UserEntity.create({
+            name: 'teste 1',
+            email: 'teste@teste.com',
+            password: '123'
+        });
+        await user.save();
+        const jwt = user.generateJwt();
+        await user.remove();
+
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
