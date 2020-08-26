@@ -23,7 +23,7 @@ describe('Phone Resolver Store test suit', () => {
         return (await connection).close();
     });
 
-    it('should store an phone', async () => {
+    it('should store a phone', async () => {
 
         const user = UserEntity.create({
             name: 'teste 1',
@@ -31,13 +31,14 @@ describe('Phone Resolver Store test suit', () => {
             password: '123'
         });
         await user.save();
+        const jwt = user.generateJwt();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
                         storePhone(
-                            userId: ${user.id}
                             phone: "987452217"
                         ) {
                             id
@@ -53,12 +54,21 @@ describe('Phone Resolver Store test suit', () => {
 
     it('should return an error for "User not found"', async () => {
 
+        const user = UserEntity.create({
+            name: 'teste 1',
+            email: 'teste@teste.com',
+            password: '123'
+        });
+        await user.save();
+        const jwt = user.generateJwt();
+        await user.remove();
+
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
                         storePhone(
-                            userId: 1
                             phone: "987452217"
                         ) {
                             id

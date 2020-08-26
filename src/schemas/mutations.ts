@@ -50,7 +50,6 @@ export default gql`
         #################################
 
         storePhone(
-            userId: ID!
             phone: String!
         ): Phone
 

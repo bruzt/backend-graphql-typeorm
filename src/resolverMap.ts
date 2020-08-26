@@ -52,7 +52,7 @@ export default {
         updateAddress: (_: unknown, args: IUpdateAddress, context: { req: Request; }) => addressResolvers.update(args, context),
         destroyAddress: (_: unknown, args: unknown, context: { req: Request; }) => addressResolvers.destroy(context),
         
-        storePhone: (_: unknown, args: IStorePhone) => phoneResolvers.store(args),
+        storePhone: (_: unknown, args: IStorePhone, context: { req: Request; }) => phoneResolvers.store(args, context),
         updatePhone: (_: unknown, args: IUpdatePhone) => phoneResolvers.update(args),
         destroyPhone: (_: unknown, args: { id: number; }) => phoneResolvers.destroy(args.id),
 
