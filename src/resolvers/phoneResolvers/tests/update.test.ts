@@ -31,6 +31,7 @@ describe('Phone Resolver Update test suit', () => {
             password: '123'
         });
         await user.save();
+        const jwt = user.generateJwt();
 
         const phone = PhoneEntity.create({
             phone: '996541245',
@@ -39,6 +40,7 @@ describe('Phone Resolver Update test suit', () => {
         await phone.save();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
@@ -58,9 +60,50 @@ describe('Phone Resolver Update test suit', () => {
         expect(response.body.data.updatePhone.phone).toBe("888744541");
     });
 
-    it('should return an error for "Phone not found"', async () => {
+    it('should return an error for "User not found"', async () => {
+
+        const user = UserEntity.create({
+            name: 'teste 1',
+            email: 'teste@teste.com',
+            password: '123'
+        });
+        await user.save();
+        const jwt = user.generateJwt();
+        await user.remove();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
+            .send({
+                query: `
+                    mutation {
+                        updatePhone(
+                            id: 1
+                            newPhone: "888744541"
+                        ) {
+                            id
+                            phone
+                        }
+                    }
+                `
+            })
+        ;
+
+        expect(response.body.errors.length).toBeGreaterThan(0);
+        expect(response.body.errors[0].message).toBe("User not found");
+    });
+
+    it('should return an error for "Phone not found"', async () => {
+
+        const user = UserEntity.create({
+            name: 'teste 1',
+            email: 'teste@teste.com',
+            password: '123'
+        });
+        await user.save();
+        const jwt = user.generateJwt();
+
+        const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
