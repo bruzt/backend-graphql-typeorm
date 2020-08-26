@@ -45,7 +45,7 @@ export default gql`
             zipcode: String
         ): Address
 
-        destroyAddress(id: ID!): Boolean
+        destroyAddress: Boolean
 
         #################################
 

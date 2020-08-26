@@ -1,14 +1,21 @@
 import { UserInputError } from 'apollo-server-express';
+import { Request } from 'express';
 
-import AddressEntity from '../../entities/AddressEntity';
+import checkHeadersAuthorization from '../../utils/checkHeadersAuthorization';
+import UserEntity from '../../entities/UserEntity';
 
-export default async function destroy(id: number){
+export default async function destroy(context: { req: Request; }){
 
-    const address = await AddressEntity.findOne({ id });
+    const tokenPayload = checkHeadersAuthorization(context.req);
 
-    if(!address) throw new UserInputError('Address not found');
+    const user = await UserEntity.findOne({ id: tokenPayload.userId }, {
+        relations: ['address']
+    })
 
-    await address.remove();
+    if(!user) throw new UserInputError('User not found');
+    if(!user.address) throw new UserInputError('Address not found');
+
+    await user.address.remove();
 
     return true;
 }
