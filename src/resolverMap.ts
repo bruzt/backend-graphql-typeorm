@@ -49,7 +49,7 @@ export default {
         destroyUser: (_: unknown, args: unknown, context: { req: Request; }) => userResolvers.destroy(context),
 
         storeAddress: (_: unknown, args: IStoreAddress, context: { req: Request; }) => addressResolvers.store(args, context),
-        updateAddress: (_: unknown, args: IUpdateAddress) => addressResolvers.update(args),
+        updateAddress: (_: unknown, args: IUpdateAddress, context: { req: Request; }) => addressResolvers.update(args, context),
         destroyAddress: (_: unknown, args: { id: number; }) => addressResolvers.destroy(args.id),
         
         storePhone: (_: unknown, args: IStorePhone) => phoneResolvers.store(args),

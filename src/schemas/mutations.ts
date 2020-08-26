@@ -37,7 +37,6 @@ export default gql`
         ): Address
 
         updateAddress(
-            id: ID!
             street: String
             number: String
             neighborhood: String

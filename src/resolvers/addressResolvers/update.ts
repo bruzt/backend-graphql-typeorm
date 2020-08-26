@@ -1,9 +1,10 @@
 import { UserInputError } from 'apollo-server-express';
+import { Request } from 'express';
 
-import AddressEntity from '../../entities/AddressEntity';
+import checkHeadersAuthorization from '../../utils/checkHeadersAuthorization';
+import UserEntity from '../../entities/UserEntity';
 
 export interface IUpdateAddress {
-    id: number;
     street?: string;
     number?: string;
     neighborhood?: string;
@@ -12,26 +13,32 @@ export interface IUpdateAddress {
     zipcode?: string;
 }
 
-export default async function update({
-    id,
-    street,
-    number,
-    neighborhood,
-    city,
-    uf,
-    zipcode,
-}: IUpdateAddress){
+export default async function update(args: IUpdateAddress, context: { req: Request; }){
 
-    const address = await AddressEntity.findOne({ id });
+    const tokenPayload = checkHeadersAuthorization(context.req);
 
-    if(!address) throw new UserInputError('Address not found');
+    const {
+        street,
+        number,
+        neighborhood,
+        city,
+        uf,
+        zipcode,
+    } = args;    
 
-    if(street) address.street = street;
-    if(number) address.number = number;
-    if(neighborhood) address.neighborhood = neighborhood;
-    if(city) address.city = city;
-    if(uf) address.uf = uf;
-    if(zipcode) address.zipcode = zipcode;
+    const user = await UserEntity.findOne({ id: tokenPayload.userId }, {
+        relations: ['address']
+    });
+    
+    if(!user) throw new UserInputError('User not found');
+    if(!user.address) throw new UserInputError('Address not found');
 
-    return address.save();
+    if(street) user.address.street = street;
+    if(number) user.address.number = number;
+    if(neighborhood) user.address.neighborhood = neighborhood;
+    if(city) user.address.city = city;
+    if(uf) user.address.uf = uf;
+    if(zipcode) user.address.zipcode = zipcode;
+
+    return user.address.save();
 }
