@@ -14,15 +14,26 @@ export default async function store({
     password
 }: IStoreUser){
  
-    const user = await UserEntity.findOne({ email });
+    const user = await UserEntity.findOne({ email }, { withDeleted: true });
 
-    if(user) throw new UserInputError('e-mail already in use');
+    if(user && !user.deletedAt) throw new UserInputError('e-mail already in use');
+    else if(user && user.deletedAt) {
+        
+        user.name = name;
+        user.password = password;
 
-    const newUser = UserEntity.create({
-        name,
-        email,
-        password
-    });
+        await user.save();
+    
+        return user.recover();
 
-    return newUser.save()
+    } else {
+
+        const newUser = UserEntity.create({
+            name,
+            email,
+            password
+        });
+    
+        return newUser.save()
+    }
 }
