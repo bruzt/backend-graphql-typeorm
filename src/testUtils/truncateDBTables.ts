@@ -29,6 +29,9 @@ async function cleanAll(entities: IEntitiesList[]) {
 
 export default async function truncateDBTables() {
 
-    const entities = await getEntities();
-    await cleanAll(entities);
+    if(process.env.NODE_ENV === 'test'){
+
+        const entities = await getEntities();
+        await cleanAll(entities);
+    }
 }
