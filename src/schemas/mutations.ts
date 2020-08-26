@@ -34,7 +34,6 @@ export default gql`
             city: String!
             uf: String!
             zipcode: String!
-            userId: ID!
         ): Address
 
         updateAddress(

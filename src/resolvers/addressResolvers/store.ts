@@ -1,7 +1,9 @@
 import { UserInputError } from 'apollo-server-express';
+import { Request } from 'express';
 
 import AddressEntity from '../../entities/AddressEntity';
 import UserEntity from '../../entities/UserEntity';
+import checkHeadersAuthorization from '../../utils/checkHeadersAuthorization';
 
 export interface IStoreAddress {
     street: string;
@@ -10,20 +12,22 @@ export interface IStoreAddress {
     city: string;
     uf: string;
     zipcode: string;
-    userId: number;
 }
 
-export default async function store({ 
-    street,
-    number,
-    neighborhood,
-    city,
-    uf,
-    zipcode,
-    userId,
-}: IStoreAddress){
+export default async function store(args: IStoreAddress, context: { req: Request; }){
 
-    const user = await UserEntity.findOne({ id: userId }, { relations: ['address'] });
+    const tokenPayload = checkHeadersAuthorization(context.req);
+
+    const { 
+        street,
+        number,
+        neighborhood,
+        city,
+        uf,
+        zipcode,
+    } = args;
+
+    const user = await UserEntity.findOne({ id: tokenPayload.userId }, { relations: ['address'] });
 
     if(!user) throw new UserInputError('User not found');
     if(user.address && Object.keys(user.address).length > 0) {

@@ -30,10 +30,11 @@ describe('Address Resolver Store test suit', () => {
             email: 'teste@teste.com',
             password: '123'
         });
-
         await user.save();
+        const jwt = user.generateJwt();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
@@ -44,7 +45,6 @@ describe('Address Resolver Store test suit', () => {
                             city: "testeville"
                             uf: "sp"
                             zipcode: "96547888"
-                            userId: ${user.id}
                         ) {
                             id
                             street
@@ -69,7 +69,17 @@ describe('Address Resolver Store test suit', () => {
 
     it('should return an error for "User not found"', async () => {
 
+        const user = UserEntity.create({
+            name: 'teste 1',
+            email: 'teste@teste.com',
+            password: '123'
+        });
+        await user.save();
+        const jwt = user.generateJwt();
+        await user.remove();
+
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
@@ -80,7 +90,6 @@ describe('Address Resolver Store test suit', () => {
                             city: "testeville"
                             uf: "sp"
                             zipcode: "96547888"
-                            userId: 1
                         ) {
                             id
                         }
@@ -101,6 +110,7 @@ describe('Address Resolver Store test suit', () => {
             password: '123'
         });
         await user.save();
+        const jwt = user.generateJwt();
 
         const address = AddressEntity.create({
             street: "Rua test testing",
@@ -114,6 +124,7 @@ describe('Address Resolver Store test suit', () => {
         await address.save();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
@@ -124,7 +135,6 @@ describe('Address Resolver Store test suit', () => {
                             city: "testeville"
                             uf: "sp"
                             zipcode: "96547888"
-                            userId: 1
                         ) {
                             id
                             street
