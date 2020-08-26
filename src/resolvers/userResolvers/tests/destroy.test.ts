@@ -31,18 +31,20 @@ describe('User Resolver Destroy test suit', () => {
         });
 
         await user.save();
+        const jwt = user.generateJwt();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
-                        destroyUser(id: ${user.id})
+                        destroyUser
                     }
                 `
             })
         ;
 
-        const deletedUser = await UserEntity.findOne({ id: user.id });
+        const deletedUser = await UserEntity.findOne({ id: user.id }, { withDeleted: true });
         
         expect(response.body.data.destroyUser).toBe(true);
         expect(deletedUser?.deletedAt).not.toBeNull();
@@ -50,11 +52,22 @@ describe('User Resolver Destroy test suit', () => {
 
     it('should return an error for "User not found"', async () => {
 
+        const user = UserEntity.create({
+            name: 'teste 1',
+            email: 'teste@teste.com',
+            password: '123'
+        });
+
+        await user.save();
+        const jwt = user.generateJwt();
+        await user.remove();
+
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     mutation {
-                        destroyUser(id: 1)
+                        destroyUser
                     }
                 `
             })
