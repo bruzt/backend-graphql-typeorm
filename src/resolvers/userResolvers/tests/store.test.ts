@@ -74,4 +74,37 @@ describe('User Resolver Store test suit', () => {
         expect(response.body.errors[0]).toHaveProperty('message');
         expect(response.body.errors[0].message).toBe('e-mail already in use');
     });
+
+    it('should restore a soft deleted user', async () => {
+
+        const user = UserEntity.create({
+            name: 'Yui',
+            email: 'gg@eml.com',
+            password: '123654'
+        });
+        await user.save();
+        await user.softRemove();
+
+        const response = await supertest(app).post('/graphql')
+            .send({
+                query: `
+                    mutation {
+                        storeUser(
+                            name: "novo user"
+                            email: "gg@eml.com"
+                            password: "1b5C8"
+                        ) {
+                            id
+                            name
+                            email
+                        }
+                    }
+                `
+            })
+        ;
+
+        expect(response.body.data.storeUser.id).toBe(`${user.id}`);
+        expect(response.body.data.storeUser.name).toBe('novo user');
+        expect(response.body.data.storeUser.email).toBe('gg@eml.com');
+    });
 });
