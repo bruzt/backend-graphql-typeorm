@@ -54,7 +54,7 @@ export default {
         
         storePhone: (_: unknown, args: IStorePhone, context: { req: Request; }) => phoneResolvers.store(args, context),
         updatePhone: (_: unknown, args: IUpdatePhone, context: { req: Request; }) => phoneResolvers.update(args, context),
-        destroyPhone: (_: unknown, args: { id: number; }) => phoneResolvers.destroy(args.id),
+        destroyPhone: (_: unknown, args: { id: number; }, context: { req: Request; }) => phoneResolvers.destroy(args.id, context),
 
         storeProject: (_: unknown, args: IStoreProject) => projectResolvers.store(args),
         updateProject: (_: unknown, args: IUpdateProject) => projectResolvers.update(args),

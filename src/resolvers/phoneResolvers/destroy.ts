@@ -1,15 +1,24 @@
-import PhoneEntity from '../../entities/PhoneEntity';
+import { Request } from 'express';
+
 import { UserInputError } from 'apollo-server-express';
+import checkHeadersAuthorization from '../../utils/checkHeadersAuthorization';
+import UserEntity from '../../entities/UserEntity';
 
-export default async function destroy(id: number){
+export default async function destroy(id: number, context: { req: Request }){
 
-    const phone = await PhoneEntity.findOne({ id }, {
-        withDeleted: true
+    const tokenPayload = checkHeadersAuthorization(context.req);
+
+    const user = await UserEntity.findOne({ id: tokenPayload.userId }, {
+        relations: ['phones']
     });
 
-    if(!phone) throw new UserInputError('Phone not found');
+    if(!user) throw new UserInputError('User not found');
 
-    await phone.remove();
+    const phone = user.phones?.filter( (phone) => phone.id == id);
+
+    if(!phone || phone.length == 0) throw new UserInputError('Phone not found');
+
+    await phone[0].remove();
 
     return true;
 }
