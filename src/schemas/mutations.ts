@@ -23,7 +23,7 @@ export default gql`
             password: String
         ): User
 
-        destroyUser(id: ID!): Boolean
+        destroyUser: Boolean
 
         #################################
 

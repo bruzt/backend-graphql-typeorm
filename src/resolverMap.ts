@@ -46,7 +46,7 @@ export default {
 
         storeUser: (_: unknown, args: IStoreUser) => userResolvers.store(args),
         updateUser: (_: unknown, args: IUpdateUser, context: { req: Request; }) => userResolvers.update(args, context),
-        destroyUser: (_: unknown, args: { id: number }) => userResolvers.destroy(args.id),
+        destroyUser: (_: unknown, args: unknown, context: { req: Request; }) => userResolvers.destroy(context),
 
         storeAddress: (_: unknown, args: IStoreAddress) => addressResolvers.store(args),
         updateAddress: (_: unknown, args: IUpdateAddress) => addressResolvers.update(args),
