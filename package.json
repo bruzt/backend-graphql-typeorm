@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=development ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "preprod": "npm run prod:migration:run",
     "prod": "cross-env NODE_ENV=production pm2 start --name backend-graphql-typeorm ts-node -- --transpile-only src/server.ts",
-    "postprod": "pm2 monit",
+    "postprod": "pm2 logs",
     "test:migration:run": "cross-env NODE_ENV=test ts-node ./node_modules/typeorm/cli.js migration:run",
     "test:migration:revert": "cross-env NODE_ENV=test ts-node ./node_modules/typeorm/cli.js migration:revert",
     "dev:migration:run": "cross-env NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:run",
