@@ -15,7 +15,7 @@
     "test:migration:revert": "cross-env NODE_ENV=test ts-node ./node_modules/typeorm/cli.js migration:revert",
     "dev:migration:run": "cross-env NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:run",
     "dev:migration:revert": "cross-env NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:revert",
-    "prod:migration:run": "cross-env NODE_ENV=production ts-node ./node_modules/typeorm/cli.js migration:run"
+    "prod:migration:run": "cross-env NODE_ENV=production ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run"
   },
   "keywords": [],
   "author": "",
@@ -31,8 +31,9 @@
     "pg": "^8.3.0",
     "pm2": "^4.4.0",
     "ts-node": "^8.10.2",
-    "typeorm": "^0.2.25",
-    "typescript": "^3.9.7",
+    "typeorm": "^0.2.25"
+  },
+  "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.7",
     "@types/jest": "^26.0.10",
@@ -44,6 +45,7 @@
     "jest": "^26.4.0",
     "supertest": "^4.0.2",
     "ts-jest": "^26.2.0",
-    "ts-node-dev": "^1.0.0-pre.57"
+    "ts-node-dev": "^1.0.0-pre.57",
+    "typescript": "^3.9.7"
   }
 }
