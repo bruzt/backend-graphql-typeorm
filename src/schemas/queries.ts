@@ -5,7 +5,7 @@ export default gql`
     type Query {
 
         listUsers: [User]
-        showUser(id: ID!): User
+        showUser: User
 
         listAddresses: [Address]
         showAddress(id: ID!): Address

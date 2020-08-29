@@ -1,9 +1,14 @@
 
+import { Request } from 'express';
 import UserEntity from '../../entities/UserEntity';
 
-export default function show(id: number){
+import checkHeadersAuthorization from '../../utils/checkHeadersAuthorization';
 
-    return UserEntity.findOne({ id }, {
+export default function show(context: { req: Request; }){
+
+    const tokenPayload = checkHeadersAuthorization(context.req);
+
+    return UserEntity.findOne({ id: tokenPayload.userId }, {
         relations: ['address', 'phones', 'usersProjects']
     });
 }

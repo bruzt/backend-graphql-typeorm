@@ -31,12 +31,14 @@ describe('User Resolver Show test suit', () => {
         });
 
         await user.save();
+        const jwt = user.generateJwt();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     query {
-                        showUser(id: ${user.id}) {
+                        showUser {
                             id
                         }
                     }
