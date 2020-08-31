@@ -31,6 +31,7 @@ describe('Address Resolver Show test suit', () => {
             password: '123'
         });
         await user.save();
+        const jwt = user.generateJwt();
 
         const addr = AddressEntity.create({
             street: 'aaa',
@@ -44,10 +45,11 @@ describe('Address Resolver Show test suit', () => {
         await addr.save();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     query {
-                        showAddress(id: ${addr.id}) {
+                        showAddress {
                             id
                             street
                         }

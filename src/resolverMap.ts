@@ -27,7 +27,7 @@ export default {
         showUser: (_: unknown, args: unknown, context: { req: Request; }) => userResolvers.show(context),
 
         listAddresses: () => addressResolvers.list(),
-        showAddress: (_: unknown, args: { id: number; }) => addressResolvers.show(args.id),
+        showAddress: (_: unknown, args: unknown, context: { req: Request; }) => addressResolvers.show(context),
 
         listPhones: () => phoneResolvers.list(),
         showPhone: (_: unknown, args: { id: number; }) => phoneResolvers.show(args.id),
