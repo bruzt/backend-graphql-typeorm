@@ -1,6 +1,6 @@
 API Node.js escrita em Typescript utilizando GraphQL, TypeORM e o banco de dados PostgreSQL com exemplos de relacionamento 1:1, 1:N e N:N com Jest para testes automatizados.
 
-A API cadastra usuários e projetos, o usuário pode cadastrar um endereço e varios telefones. Para buscar, cadastrar, alterar ou deletar o endereço ou um dos telefones o usuário precisa se autenticar, enviando uma Bearer Token no headers da requisição. O usuário pode ser atribuido a um projeto e um projeto pode estar atribuido a vários usuários.
+A API cadastra usuários e projetos, o usuário pode cadastrar um endereço e vários telefones. Para buscar, cadastrar, alterar ou deletar o endereço ou um dos telefones o usuário precisa se autenticar, enviando uma Bearer Token no headers da requisição. O usuário pode ser atribuído a um projeto e um projeto pode estar atribuído a vários usuários.
 
 ## Schema
 
