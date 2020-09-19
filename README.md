@@ -114,3 +114,23 @@ destroyUserProject(id: ID!): Boolean
 <p align="center">
   <img src="https://github.com/bruzt/backend-graphql-typeorm/blob/master/img1.gif?raw=true">
 </p>
+
+## Para testar
+
+Se você deseja testar essa API instale os pacotes com o comando "npm install" e inicie um banco de dados Postgres com o comando abaixo (requer [Docker](https://www.docker.com/)):
+
+```
+sudo docker run --rm -d \
+    --name postgres-typeorm-dev \
+    -e POSTGRES_USER=devDB \
+    -e POSTGRES_PASSWORD=123 \
+    -e POSTGRES_DB=dev \
+    -p 5432:5432 \
+    postgres:12.3
+```
+
+* Se você deseja usar outro banco será necessário alterar os dados no arquivo ".env.dev" na raiz do projeto.
+
+Após iniciar o banco de dados execute as migrations para criar as tabelas no banco de dados com o comando "npm run dev:migration:run" e inicie o projeto com o comando "npm run dev".
+Para acessar a API use o [Insomnia](https://insomnia.rest/) e importe o workspace que está na raiz do projeto ("Insomnia_workspace.json").
+
