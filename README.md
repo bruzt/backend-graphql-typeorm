@@ -9,11 +9,9 @@ A API cadastra usuários e projetos, o usuário pode cadastrar um endereço e v�
 listUsers: [User]
 showUser: User
 
-listAddresses: [Address]
 showAddress: Address
 
 listPhones: [Phone]
-showPhone(id: ID!): Phone
 
 listProjects: [Project]
 showProject(id: ID!): Project
