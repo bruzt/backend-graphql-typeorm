@@ -20,6 +20,9 @@ export default class PhoneEntity extends BaseEntity {
     @Column()
     phone!: string;    
 
+    @Column()
+    userId!: number;
+
     @CreateDateColumn()
     createdAt!: Date;
 
