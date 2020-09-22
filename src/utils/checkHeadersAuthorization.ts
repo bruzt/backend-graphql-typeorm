@@ -6,16 +6,18 @@ interface ITokenPayload {
     userId: number;
 }
 
+const bearerError = 'Not authorized, invalid Bearer Token';
+
 export default function checkHeadersAuthorization(req: Request) {
 
     const reqAuth = req.headers.authorization;
 
-    if(!reqAuth) throw new UserInputError('Not authorized');
+    if(!reqAuth) throw new UserInputError(bearerError);
 
     const [bearer, token] = reqAuth.split(' ');
 
-    if(bearer !== 'Bearer') throw new UserInputError('Not authorized');
-    if(token.length < 100) throw new UserInputError('Not authorized');
+    if(bearer !== 'Bearer') throw new UserInputError(bearerError);
+    if(token.length < 100) throw new UserInputError(bearerError);
 
     try {
         
@@ -24,6 +26,6 @@ export default function checkHeadersAuthorization(req: Request) {
         return tokenPayload;
 
     } catch (error) {
-        throw new UserInputError('Not authorized');
+        throw new UserInputError(bearerError);
     }
 }
