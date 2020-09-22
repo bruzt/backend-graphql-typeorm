@@ -35,6 +35,9 @@ export default class AddressEntity extends BaseEntity {
     @Column()
     zipcode!: string;    
 
+    @Column()
+    userId!: number;  
+
     @CreateDateColumn()
     createdAt!: Date;
 
