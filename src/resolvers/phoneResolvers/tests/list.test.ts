@@ -30,8 +30,8 @@ describe('Phone Resolver List test suit', () => {
             email: 'teste@teste.com',
             password: '123'
         });
-
         await user.save();
+        const jwt = user.generateJwt();
 
         const phone1 = PhoneEntity.create({
             phone: '996541245',
@@ -46,6 +46,7 @@ describe('Phone Resolver List test suit', () => {
         await phone2.save();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     query {
