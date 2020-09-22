@@ -12,8 +12,8 @@ export default gql`
         email: String
         createdAt: String
         updatedAt: String
-        address: Address
-        phones: [Phone]
+        #address: Address
+        #phones: [Phone]
         usersProjects: [UsersProjects]
     }
 
@@ -27,7 +27,7 @@ export default gql`
         zipcode: String
         createdAt: String
         updatedAt: String
-        user: User
+        #user: User
     }
 
     type Phone {
@@ -35,7 +35,7 @@ export default gql`
         phone: String
         createdAt: String
         updatedAt: String
-        user: User
+        #user: User
     }
 
     type Project {

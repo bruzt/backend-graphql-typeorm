@@ -9,6 +9,6 @@ export default function show(context: { req: Request; }){
     const tokenPayload = checkHeadersAuthorization(context.req);
 
     return UserEntity.findOne({ id: tokenPayload.userId }, {
-        relations: ['address', 'phones', 'usersProjects']
+        relations: ['usersProjects']
     });
 }
