@@ -7,11 +7,9 @@ export default gql`
         listUsers: [User]
         showUser: User
 
-        listAddresses: [Address]
         showAddress: Address
 
         listPhones: [Phone]
-        showPhone(id: ID!): Phone
 
         listProjects: [Project]
         showProject(id: ID!): Project
