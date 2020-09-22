@@ -1,13 +1,11 @@
+import { Request } from 'express';
+
 import PhoneEntity from '../../entities/PhoneEntity';
+import checkHeadersAuthorization from '../../utils/checkHeadersAuthorization';
 
-export default function list(){
+export default function list(context: { req: Request }){
 
-    return PhoneEntity.find({
-        relations: [
-            'user', 
-            'user.address',
-            'user.phones',
-            'user.usersProjects'
-        ]
-    });
+    const tokenPayload = checkHeadersAuthorization(context.req);
+
+    return PhoneEntity.find({ userId: tokenPayload.userId });
 }
