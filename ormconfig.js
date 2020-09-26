@@ -14,7 +14,7 @@ dotenv.config({
 const path = require('path');
 
 module.exports = {
-    type: "postgres",
+    type: process.env.DB_TYPE,
     url: process.env.DATABASE_URL,
     entities: [path.join('src', 'entities', '*.ts')],
     migrations: [path.join('src', 'database', 'migrations', '*.ts')],
