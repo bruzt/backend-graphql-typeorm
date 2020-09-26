@@ -15,7 +15,6 @@ export default gql`
         showProject(id: ID!): Project
 
         listUsersProjects: [UsersProjects]
-        showUsersProjects(id: ID!): UsersProjects
 
     }
 `;

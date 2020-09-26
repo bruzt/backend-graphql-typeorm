@@ -30,11 +30,17 @@ export default class UsersProjectsEntity extends BaseEntity {
     @DeleteDateColumn()
     deletedAt?: Date;
 
+    @Column()
+    userId!: number;
+
+    @Column()
+    projectId!: number;
+
     ///////////////////////////////
 
-    @ManyToOne(() => UserEntity, user => user.usersProjects, { eager: true })
+    @ManyToOne(() => UserEntity, user => user.usersProjects)
     user!: UserEntity;
 
-    @ManyToOne(() => ProjectEntity, project => project.usersProjects, { eager: true })
+    @ManyToOne(() => ProjectEntity, project => project.usersProjects)
     project!: ProjectEntity;
 }

@@ -32,6 +32,7 @@ describe('UserProject Resolver List test suit', () => {
             password: '123'
         });
         await user.save();
+        const jwt = user.generateJwt();
 
         const project1 = ProjectEntity.create({
             title: "titulo proj",
@@ -58,6 +59,7 @@ describe('UserProject Resolver List test suit', () => {
         await userProject2.save();
 
         const response = await supertest(app).post('/graphql')
+            .set('authorization', `Bearer ${jwt.token}`)
             .send({
                 query: `
                     query {

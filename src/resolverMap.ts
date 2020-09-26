@@ -33,8 +33,7 @@ export default {
         listProjects: () => projectResolvers.list(),
         showProject: (_: unknown, args: { id: number; }) => projectResolvers.show(args.id),
 
-        listUsersProjects: () => usersProjectsResolvers.list(),
-        showUsersProjects: (_: unknown, args: { id: number; }) => usersProjectsResolvers.show(args.id),
+        listUsersProjects: (_: unknown, args: unknown, context: { req: Request; }) => usersProjectsResolvers.list(context),
 
     },
 
