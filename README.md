@@ -117,13 +117,13 @@ destroyUserProject(id: ID!): Boolean
 Se você deseja testar essa API instale os pacotes com o comando "npm install" e inicie um banco de dados Postgres com o comando abaixo (requer [Docker](https://www.docker.com/)):
 
 ```
-sudo docker run --rm -d \
+docker run --rm -d \
     --name postgres-typeorm-dev \
     -e POSTGRES_USER=devDB \
     -e POSTGRES_PASSWORD=123 \
     -e POSTGRES_DB=dev \
     -p 5432:5432 \
-    postgres:12.3
+    postgres:13.0
 ```
 
 * Se você deseja usar outro banco será necessário alterar os dados no arquivo ".env.dev" na raiz do projeto.
@@ -131,3 +131,19 @@ sudo docker run --rm -d \
 Após iniciar o banco de dados execute as migrations para criar as tabelas no banco de dados com o comando "npm run dev:migration:run" e inicie o projeto com o comando "npm run dev".
 Para acessar a API use o [Insomnia](https://insomnia.rest/) e importe o workspace que está na raiz do projeto ("Insomnia_workspace.json").
 
+### Executar testes automatizados
+
+Para executar os testes automatizados instale os pacotes com o comando "npm install" e inicie um banco de dados Postgres com o comando abaixo (requer [Docker](https://www.docker.com/)):
+
+```
+docker run --rm -d \
+    --name postgres-typeorm-tests \
+    -e POSTGRES_USER=testDB \
+    -e POSTGRES_PASSWORD=123 \
+    -e POSTGRES_DB=tests \
+    -p 5433:5432 \
+    postgres:13.0
+```
+* Se você deseja usar outro banco será necessário alterar os dados no arquivo ".env.test" na raiz do projeto.
+
+Após iniciar o banco de dados execute o comando "npm test" e os testes automatizados devem começar a ser executados, depois de terminado você pode entrar no diretório coverage/lcov-report que será gerado na raiz do projeto e abrir o arquivo "index.html" no seu navegador para ver a cobertura de código.
