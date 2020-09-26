@@ -7,7 +7,7 @@ sudo docker run --rm -d \
     -e POSTGRES_PASSWORD=123 \
     -e POSTGRES_DB=tests \
     -p 5433:5432 \
-    postgres:12.3
+    postgres:13.0
 ```
 
 ```
@@ -26,7 +26,7 @@ sudo docker run --rm -d \
     -e POSTGRES_PASSWORD=123 \
     -e POSTGRES_DB=dev \
     -p 5432:5432 \
-    postgres:12.3
+    postgres:13.0
 ```
 
 ```
