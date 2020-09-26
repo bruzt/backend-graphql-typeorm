@@ -17,7 +17,6 @@ listProjects: [Project]
 showProject(id: ID!): Project
 
 listUsersProjects: [UsersProjects]
-showUsersProjects(id: ID!): UsersProjects
 ```
 
 ### Mutation
