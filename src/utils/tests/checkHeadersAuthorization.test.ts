@@ -51,12 +51,9 @@ describe('Utils checkHeadersAuthorization test suit', () => {
             password: '123'
         });
         await user.save();
-        const jwt = user.generateJwt();
 
         const req: Request = {
-            headers: {
-                
-            }
+            headers: {}
         } as any;
 
         try {
@@ -65,7 +62,7 @@ describe('Utils checkHeadersAuthorization test suit', () => {
 
         } catch (error) {
             expect(error.name).toBe("UserInputError");
-            expect(error.message).toBe("Not authorized");
+            expect(error.message).toBe("Not authorized, invalid Bearer Token");
         }
     });
 
@@ -91,7 +88,7 @@ describe('Utils checkHeadersAuthorization test suit', () => {
 
         } catch (error) {
             expect(error.name).toBe("UserInputError");
-            expect(error.message).toBe("Not authorized");
+            expect(error.message).toBe("Not authorized, invalid Bearer Token");
         }
     });
 
@@ -109,7 +106,7 @@ describe('Utils checkHeadersAuthorization test suit', () => {
 
         } catch (error) {
             expect(error.name).toBe("UserInputError");
-            expect(error.message).toBe("Not authorized");
+            expect(error.message).toBe("Not authorized, invalid Bearer Token");
         }
     });
 
@@ -135,7 +132,7 @@ describe('Utils checkHeadersAuthorization test suit', () => {
 
         } catch (error) {
             expect(error.name).toBe("UserInputError");
-            expect(error.message).toBe("Not authorized");
+            expect(error.message).toBe("Not authorized, invalid Bearer Token");
         }
     });
 });
