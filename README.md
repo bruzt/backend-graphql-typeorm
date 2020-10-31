@@ -146,4 +146,8 @@ docker run --rm -d \
 ```
 * Se você deseja usar outro banco será necessário alterar os dados no arquivo ".env.test" na raiz do projeto.
 
-Após iniciar o banco de dados execute o comando "npm test" e os testes automatizados devem começar a ser executados, depois de terminado você pode entrar no diretório coverage/lcov-report que será gerado na raiz do projeto e abrir o arquivo "index.html" no seu navegador para ver a cobertura de código.
+Após iniciar o banco de dados execute o comando "npm test" e os testes automatizados devem começar a ser executados, depois de terminado você pode entrar no diretório "coverage/lcov-report" que será gerado na raiz do projeto e abrir o arquivo "index.html" no seu navegador para ver a cobertura de código.
+
+<p align="center">
+  <img src="https://github.com/bruzt/backend-graphql-typeorm/blob/master/tests-coverage.png?raw=true">
+</p>
