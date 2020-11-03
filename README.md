@@ -1,4 +1,4 @@
-API GraphQL usando ExpressJS (NodeJS) e [Apollo Server](https://github.com/apollographql/apollo-server) integrada com o banco de dados PostgreSQL com o ORM TypeORM com exemplos de relacionamento one-to-one, one-to-many e many-to-many e Jest para testes automatizados.
+API GraphQL usando ExpressJS (NodeJS) e [Apollo Server](https://github.com/apollographql/apollo-server) integrada com o banco de dados PostgreSQL com o ORM TypeORM com exemplos de relacionamento one-to-one, one-to-many, many-to-many e Jest para testes automatizados.
 
 A API cadastra usuários e projetos, o usuário pode cadastrar um endereço e vários telefones. Para buscar, cadastrar, alterar ou deletar o endereço ou um dos telefones o usuário precisa se autenticar, enviando uma Bearer Token no headers da requisição. O usuário pode ser atribuído a vários projetos e um projeto pode estar atribuído a vários usuários.
 
