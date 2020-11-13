@@ -1,7 +1,5 @@
 import { createConnection } from 'typeorm';
 
-const ormConfig = require('../../ormconfig');
-
-const connection = createConnection(ormConfig);
+const connection = createConnection();
 
 export default connection;
