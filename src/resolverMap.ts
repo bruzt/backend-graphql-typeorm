@@ -19,47 +19,51 @@ import { IUpdateProject } from './resolvers/projectResolvers/update';
 import { IStoreUsersProjects } from './resolvers/usersProjectsResolvers/store';
 import { IUpdateUserProject } from './resolvers/usersProjectsResolvers/update';
 
+interface IContext {
+    req: Request;
+}
+
 export default {
 
     Query: {
 
         listUsers: () => userResolvers.list(),
-        showUser: (_: unknown, args: unknown, context: { req: Request; }) => userResolvers.show(context),
+        showUser: (parent: unknown, args: unknown, context: IContext) => userResolvers.show(context),
 
-        showAddress: (_: unknown, args: unknown, context: { req: Request; }) => addressResolvers.show(context),
+        showAddress: (parent: unknown, args: unknown, context: IContext) => addressResolvers.show(context),
 
-        listPhones: (_: unknown, args: unknown, context: { req: Request; }) => phoneResolvers.list(context),
+        listPhones: (parent: unknown, args: unknown, context: IContext) => phoneResolvers.list(context),
 
         listProjects: () => projectResolvers.list(),
-        showProject: (_: unknown, args: { id: number; }) => projectResolvers.show(args.id),
+        showProject: (parent: unknown, args: { id: number; }) => projectResolvers.show(args.id),
 
-        listUsersProjects: (_: unknown, args: unknown, context: { req: Request; }) => usersProjectsResolvers.list(context),
+        listUsersProjects: (parent: unknown, args: unknown, context: IContext) => usersProjectsResolvers.list(context),
 
     },
 
     Mutation: {
 
-        session: (_: unknown, args: ISession) => session(args),
+        session: (parent: unknown, args: ISession) => session(args),
 
-        storeUser: (_: unknown, args: IStoreUser) => userResolvers.store(args),
-        updateUser: (_: unknown, args: IUpdateUser, context: { req: Request; }) => userResolvers.update(args, context),
-        destroyUser: (_: unknown, args: unknown, context: { req: Request; }) => userResolvers.destroy(context),
+        storeUser: (parent: unknown, args: IStoreUser) => userResolvers.store(args),
+        updateUser: (parent: unknown, args: IUpdateUser, context: IContext) => userResolvers.update(args, context),
+        destroyUser: (parent: unknown, args: unknown, context: IContext) => userResolvers.destroy(context),
 
-        storeAddress: (_: unknown, args: IStoreAddress, context: { req: Request; }) => addressResolvers.store(args, context),
-        updateAddress: (_: unknown, args: IUpdateAddress, context: { req: Request; }) => addressResolvers.update(args, context),
-        destroyAddress: (_: unknown, args: unknown, context: { req: Request; }) => addressResolvers.destroy(context),
-        
-        storePhone: (_: unknown, args: IStorePhone, context: { req: Request; }) => phoneResolvers.store(args, context),
-        updatePhone: (_: unknown, args: IUpdatePhone, context: { req: Request; }) => phoneResolvers.update(args, context),
-        destroyPhone: (_: unknown, args: { id: number; }, context: { req: Request; }) => phoneResolvers.destroy(args.id, context),
+        storeAddress: (parent: unknown, args: IStoreAddress, context: IContext) => addressResolvers.store(args, context),
+        updateAddress: (parent: unknown, args: IUpdateAddress, context: IContext) => addressResolvers.update(args, context),
+        destroyAddress: (parent: unknown, args: unknown, context: IContext) => addressResolvers.destroy(context),
 
-        storeProject: (_: unknown, args: IStoreProject) => projectResolvers.store(args),
-        updateProject: (_: unknown, args: IUpdateProject) => projectResolvers.update(args),
-        destroyProject: (_: unknown, args: { id: number; }) => projectResolvers.destroy(args.id),
+        storePhone: (parent: unknown, args: IStorePhone, context: IContext) => phoneResolvers.store(args, context),
+        updatePhone: (parent: unknown, args: IUpdatePhone, context: IContext) => phoneResolvers.update(args, context),
+        destroyPhone: (parent: unknown, args: { id: number; }, context: IContext) => phoneResolvers.destroy(args.id, context),
 
-        storeUserProject: (_: unknown, args: IStoreUsersProjects) => usersProjectsResolvers.store(args),
-        updateUserProject: (_: unknown, args: IUpdateUserProject) => usersProjectsResolvers.update(args),
-        destroyUserProject: (_: unknown, args: { id: number; }) => usersProjectsResolvers.destroy(args.id),
+        storeProject: (parent: unknown, args: IStoreProject) => projectResolvers.store(args),
+        updateProject: (parent: unknown, args: IUpdateProject) => projectResolvers.update(args),
+        destroyProject: (parent: unknown, args: { id: number; }) => projectResolvers.destroy(args.id),
+
+        storeUserProject: (parent: unknown, args: IStoreUsersProjects) => usersProjectsResolvers.store(args),
+        updateUserProject: (parent: unknown, args: IUpdateUserProject) => usersProjectsResolvers.update(args),
+        destroyUserProject: (parent: unknown, args: { id: number; }) => usersProjectsResolvers.destroy(args.id),
 
     }
 }
