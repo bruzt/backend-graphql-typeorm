@@ -56,7 +56,8 @@ export default class UserEntity extends BaseEntity {
     @BeforeUpdate()
     private async hashPassword(){
         if(this.tempPassword !== this.password){
-            this.password = await bcrypt.hash(this.password, 8);
+            const salt = await bcrypt.genSalt();
+            this.password = await bcrypt.hash(this.password, salt);
         }
     }
     
