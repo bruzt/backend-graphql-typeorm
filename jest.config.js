@@ -10,6 +10,8 @@ module.exports = {
         "json",
         "node"
       ],
+      "collectCoverageFrom": ["src/**", "!src/server.ts", "!src/database/migrations/*"],
+      "modulePathIgnorePatterns": ["build"],
       "verbose": true,
       "maxWorkers": 1,
       "testTimeout": 10000,
