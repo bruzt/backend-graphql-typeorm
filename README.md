@@ -17,7 +17,7 @@ docker run --rm -d \
     -e POSTGRES_PASSWORD=123 \
     -e POSTGRES_DB=dev \
     -p 5432:5432 \
-    postgres:13.0
+    postgres:13.2
 ```
 
 * Se você deseja usar outro banco será necessário alterar os dados no arquivo ".env.dev" na raiz do projeto.
@@ -36,7 +36,7 @@ docker run --rm -d \
     -e POSTGRES_PASSWORD=123 \
     -e POSTGRES_DB=tests \
     -p 5433:5432 \
-    postgres:13.0
+    postgres:13.2
 ```
 * Se você deseja usar outro banco será necessário alterar os dados no arquivo ".env.test" na raiz do projeto.
 
